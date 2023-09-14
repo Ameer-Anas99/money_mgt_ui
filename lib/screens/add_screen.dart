@@ -155,7 +155,7 @@ class _Add_ScreenState extends State<Add_Screen> {
                         children: [
                           Container(
                             width: 40,
-                            child: Image.asset('assets/category_img/${e}'),
+                            child: Image.asset('assets/category_img${e}'),
                           ),
                           SizedBox(width: 10),
                           Text(
