@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
-part 'add_data.g.model';
+part 'add_data.g.dart';
 
 @HiveType(typeId: 1)
-class Add_data extends HiveObject {
+class add_data extends HiveObject {
   @HiveField(0)
   String name;
   @HiveField(1)
@@ -13,5 +13,5 @@ class Add_data extends HiveObject {
   String IN;
   @HiveField(4)
   DateTime datatime;
-  Add_data(this.IN, this.amount, this.datatime, this.explain, this.name);
+  add_data(this.IN, this.amount, this.datatime, this.explain, this.name);
 }

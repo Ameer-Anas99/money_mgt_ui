@@ -17,7 +17,7 @@ class _BottomBarState extends State<BottomBar> {
   List screen = [
     Home_Screen(),
     StatisticsScreen(),
-    transaction_list(),
+    TransactionList(),
     settings(),
   ];
   @override

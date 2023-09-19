@@ -1,83 +1,129 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:my_app/function/balance.dart';
+import 'package:my_app/model/add_data.dart';
 import 'package:my_app/screens/transaction_list.dart';
 
-class Home_Screen extends StatelessWidget {
+class Home_Screen extends StatefulWidget {
   const Home_Screen({super.key});
+
+  @override
+  State<Home_Screen> createState() => _Home_ScreenState();
+}
+
+class _Home_ScreenState extends State<Home_Screen> {
+  var history;
+  final box = Hive.box<add_data>('data');
+  final List<String> day = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: SizedBox(height: 340, child: head()),
-            ),
-            SliverToBoxAdapter(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Transactions History',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        color: Colors.black,
-                      ),
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => transaction_list(),
-                          ));
-                        },
-                        child: Text(
-                          'See all',
+        child: ValueListenableBuilder(
+          valueListenable: box.listenable(),
+          builder: (context, value, child) {
+            return CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: SizedBox(height: 340, child: head()),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Transactions History',
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                            color: Colors.grey,
+                            fontSize: 20,
+                            color: Colors.black,
                           ),
-                        ))
-                  ],
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => TransactionList(),
+                              ));
+                            },
+                            child: Text(
+                              'See all',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                                color: Colors.grey,
+                              ),
+                            ))
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                return ListTile(
-                  leading: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Image.asset(
-                      'assets/tranfercash.jpg',
-                      height: 40,
-                    ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      history = box.values.toList()[index];
+                      return getList(history, index);
+                    },
+                    childCount: box.length,
                   ),
-                  title: Text(
-                    'Transfer',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 17,
-                    ),
-                  ),
-                  subtitle: Text(
-                    'today',
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  ),
-                  trailing: Text(
-                    '\$ 89',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                        color: const Color.fromARGB(255, 11, 123, 15)),
-                  ),
-                );
-              }),
-            ),
-          ],
+                ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget getList(add_data history, int index) {
+    return Dismissible(
+        key: UniqueKey(),
+        onDismissed: (direction) {
+          history.delete();
+        },
+        child: get(index, history));
+  }
+
+  ListTile get(int index, add_data history) {
+    return ListTile(
+      leading: ClipRRect(
+        borderRadius: BorderRadius.circular(5),
+        child: Image.asset(
+          'assets/tranfercash.jpg',
+          height: 40,
+        ),
+      ),
+      title: Text(
+        history.name,
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 17,
+        ),
+      ),
+      subtitle: Text(
+        '${[
+          history.datatime.weekday - 1
+        ]} ${history.datatime.day}-${history.datatime.month}-${history.datatime.year}',
+        style: TextStyle(fontWeight: FontWeight.w600),
+      ),
+      trailing: Text(
+        history.amount,
+        style: TextStyle(
+          fontWeight: FontWeight.w600,
+          fontSize: 20,
+          color: history.IN == 'Income' ? Colors.green : Colors.red,
         ),
       ),
     );
@@ -191,7 +237,7 @@ class Home_Screen extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        '\$ 4798',
+                        '\$ ${total()}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 25,
@@ -258,7 +304,7 @@ class Home_Screen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\$ 2495',
+                        '\$ ${income()}',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
@@ -266,7 +312,7 @@ class Home_Screen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '\$ 1495',
+                        '\$ ${expenses()}',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,

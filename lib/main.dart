@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/bottom/bottomnavigationbar.dart';
+import 'package:my_app/model/add_data.dart';
 
-void main() {
-  Hive.initFlutter();
+void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(adddataAdapter());
+  await Hive.openBox<add_data>('data');
   runApp(const MyApp());
 }
 
