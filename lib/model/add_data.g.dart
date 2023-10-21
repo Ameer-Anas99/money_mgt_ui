@@ -6,39 +6,42 @@ part of 'add_data.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class adddataAdapter extends TypeAdapter<add_data> {
+class TransactionModelAdapter extends TypeAdapter<TransactionModel> {
   @override
   final int typeId = 1;
 
   @override
-  add_data read(BinaryReader reader) {
+  TransactionModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return add_data(
-      fields[3] as String,
-      fields[2] as String,
-      fields[4] as DateTime,
-      fields[1] as String,
-      fields[0] as String,
+    return TransactionModel(
+      amount: fields[3] as String,
+      datetime: fields[5] as DateTime,
+      type: fields[4] as String,
+      explain: fields[2] as String,
+      category: fields[1] as String,
+      id: fields[0] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, add_data obj) {
+  void write(BinaryWriter writer, TransactionModel obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.explain)
+      ..write(obj.category)
       ..writeByte(2)
-      ..write(obj.amount)
+      ..write(obj.explain)
       ..writeByte(3)
-      ..write(obj.IN)
+      ..write(obj.amount)
       ..writeByte(4)
-      ..write(obj.datatime);
+      ..write(obj.type)
+      ..writeByte(5)
+      ..write(obj.datetime);
   }
 
   @override
@@ -47,7 +50,7 @@ class adddataAdapter extends TypeAdapter<add_data> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is adddataAdapter &&
+      other is TransactionModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

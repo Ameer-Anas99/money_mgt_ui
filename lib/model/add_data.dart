@@ -2,16 +2,26 @@ import 'package:hive/hive.dart';
 part 'add_data.g.dart';
 
 @HiveType(typeId: 1)
-class add_data extends HiveObject {
+class TransactionModel extends HiveObject {
   @HiveField(0)
-  String name;
+  String id;
+
   @HiveField(1)
-  String explain;
+  String category;
   @HiveField(2)
-  String amount;
+  String explain;
   @HiveField(3)
-  String IN;
+  String amount;
   @HiveField(4)
-  DateTime datatime;
-  add_data(this.IN, this.amount, this.datatime, this.explain, this.name);
+  String type;
+  @HiveField(5)
+  DateTime datetime;
+
+  TransactionModel(
+      {required this.category,
+      required this.amount,
+      required this.datetime,
+      required this.type,
+      required this.explain,
+      required this.id});
 }

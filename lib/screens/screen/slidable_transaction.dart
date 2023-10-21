@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:my_app/function/db_functions.dart';
+import 'package:my_app/model/add_data.dart';
+import 'package:my_app/screens/screen/editdata.dart';
+
+class SlidableTransaction extends StatelessWidget {
+  SlidableTransaction({super.key, required this.transaction});
+
+  final List<String> days = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+
+  final TransactionModel transaction;
+
+  @override
+  Widget build(BuildContext context) {
+    return Slidable(
+      endActionPane: ActionPane(motion: const StretchMotion(), children: [
+        SlidableAction(
+          onPressed: ((context) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: ((context) {
+                  return EditData(obj: transaction);
+                }),
+              ),
+            );
+          }),
+          icon: Icons.edit,
+          foregroundColor: const Color(0xFF2E49FB),
+        ),
+        SlidableAction(
+          onPressed: ((context) async {
+            await TransactionDB().deleteTransaction(transaction);
+            Navigator.of(context).pop();
+          }),
+          icon: Icons.delete,
+          foregroundColor: Colors.red,
+        ),
+      ]),
+      child: Card(
+        color: Colors.white,
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: ListTile(
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child:
+                Image.asset('assets/${transaction.category}.jpeg', height: 40),
+          ),
+          title: Text(
+            transaction.explain,
+            style: const TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          subtitle: Text(
+            '${transaction.datetime.year}-${transaction.datetime.day}-${transaction.datetime.month}  ${days[transaction.datetime.weekday - 1]}',
+            style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
+          ),
+          trailing: Text(
+            transaction.amount,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 19,
+              color: transaction.type == 'income' ? Colors.green : Colors.red,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
