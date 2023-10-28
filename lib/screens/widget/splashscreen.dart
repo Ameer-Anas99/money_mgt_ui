@@ -5,7 +5,8 @@ import 'package:my_app/screens/widget/loginscreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ScreenSplash extends StatefulWidget {
-  const ScreenSplash({super.key});
+  String file;
+  ScreenSplash({super.key, required this.file});
 
   @override
   State<ScreenSplash> createState() => _ScreenSplashState();
@@ -55,7 +56,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
       gotoLogin();
     } else {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (ctx) => BottomBar(username: "", userimage: ""),
+        builder: (ctx) => BottomBar(username: "", file: widget.file),
       ));
     }
   }

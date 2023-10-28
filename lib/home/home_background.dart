@@ -1,16 +1,41 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_app/utility/balance.dart';
 
 class HomeBackground extends StatefulWidget {
   String username;
-  String userimage;
-  HomeBackground({super.key, required this.username, required this.userimage});
+  String file;
+  HomeBackground({super.key, required this.username, required this.file});
 
   @override
   State<HomeBackground> createState() => _HomeBackgroundState();
 }
 
 class _HomeBackgroundState extends State<HomeBackground> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () async {
+      final storedUsernameBox = await Hive.openBox('username_box');
+      final storedImageBox = await Hive.openBox('image_box');
+
+      final storedUsername = storedUsernameBox.get('username');
+      final storedImagePath = storedImageBox.get('imagePath');
+      if (storedUsername != null) {
+        setState(() {
+          widget.username = storedUsername;
+        });
+      }
+      if (storedImageBox != null) {
+        setState(() {
+          widget.file = storedImagePath;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -29,46 +54,42 @@ class _HomeBackgroundState extends State<HomeBackground> {
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20))),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(7),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 35, left: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundImage:
-                                  AssetImage("${widget.userimage}"),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              'Hi ${widget.username},',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 19,
-                                  color: Color.fromARGB(255, 224, 223, 223)),
-                            ),
-                          ],
-                        ),
-                        Text(
-                          'Welcome back!',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500,
-                              fontSize: 19,
-                              color: Color.fromARGB(255, 224, 223, 223)),
-                        ),
-                      ],
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 25,
+                      backgroundImage: FileImage(File(widget.file)),
                     ),
-                  )
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(top: 55, left: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'Hi ,${widget.username}',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 19,
+                                    color: Color.fromARGB(255, 224, 223, 223)),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            'Welcome back!',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 19,
+                                color: Color.fromARGB(255, 224, 223, 223)),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ],

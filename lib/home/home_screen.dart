@@ -10,8 +10,8 @@ final List<String> day = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
 
 class HomeScreen extends StatefulWidget {
   String username;
-  String userimage;
-  HomeScreen({super.key, required this.username, required this.userimage});
+  String file;
+  HomeScreen({super.key, required this.username, required this.file});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: screenWidth,
                       child: HomeBackground(
                         username: widget.username,
-                        userimage: widget.userimage,
+                        file: widget.file,
                       )),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15),

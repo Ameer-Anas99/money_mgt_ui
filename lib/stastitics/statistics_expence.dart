@@ -32,6 +32,7 @@ class _ExpenceChartState extends State<ExpenceChart> {
                   ),
                 )
               : SfCircularChart(
+                  palette: [Color.fromARGB(224, 167, 79, 71)],
                   series: <CircularSeries>[
                     PieSeries<TransactionModel, String>(
                         dataSource: allincome,

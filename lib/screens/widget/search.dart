@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/function/db_functions.dart';
 import 'package:my_app/stastitics/statistics.dart';
-import 'package:my_app/utility/balance.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});

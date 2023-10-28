@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_app/bottom/bottomnavigationbar.dart';
 import 'package:my_app/main.dart';
@@ -20,6 +21,12 @@ class _ScreenLoginState extends State<ScreenLogin> {
 
   File? file;
   ImagePicker imagePicker = ImagePicker();
+
+  @override
+  void initState() {
+    super.initState();
+    getStoredImage();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -169,15 +176,24 @@ class _ScreenLoginState extends State<ScreenLogin> {
   void checkLogin(BuildContext context) async {
     final username = usernameController.text;
     final sharedpref = await SharedPreferences.getInstance();
+    final usernameBox = await Hive.openBox('username_box');
+    await usernameBox.put('username', username);
+
+    if (file != null) {
+      final imageBox = await Hive.openBox('image_box');
+      imageBox.put('imagePath', file!.path);
+    }
     await sharedpref.setBool(saveKeyName, true);
     await sharedpref.setString('username', username);
-    // ignore: use_build_context_synchronously
     Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (ctx) => BottomBar(
-              username: usernameController.text, userimage: file!.path),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (ctx) => BottomBar(
+          username: usernameController.text,
+          file: file!.path,
+        ),
+      ),
+    );
   }
 
   getcam() async {
@@ -194,6 +210,16 @@ class _ScreenLoginState extends State<ScreenLogin> {
     if (img != null) {
       setState(() {
         file = File(img.path);
+      });
+    }
+  }
+
+  getStoredImage() async {
+    final sharedpref = await SharedPreferences.getInstance();
+    final imagePath = sharedpref.getString('imagePath');
+    if (imagePath != null) {
+      setState(() {
+        file = File(imagePath);
       });
     }
   }

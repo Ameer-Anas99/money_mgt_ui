@@ -7,8 +7,8 @@ import 'package:my_app/screens/screen/transaction_list.dart';
 
 class BottomBar extends StatefulWidget {
   String username;
-  String userimage;
-  BottomBar({super.key, required this.username, required this.userimage});
+  String file;
+  BottomBar({super.key, required this.username, required this.file});
 
   @override
   State<BottomBar> createState() => _BottomBarState();
@@ -22,7 +22,7 @@ class _BottomBarState extends State<BottomBar> {
   void initState() {
     super.initState();
     screen = [
-      HomeScreen(username: widget.username, userimage: widget.userimage),
+      HomeScreen(username: widget.username, file: widget.file),
       StatisticsScreen(),
       TransactionList(),
       settings(),
@@ -37,7 +37,7 @@ class _BottomBarState extends State<BottomBar> {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const AddTransaction(),
+              builder: (context) => AddTransaction(file: widget.file),
             ),
           );
         },

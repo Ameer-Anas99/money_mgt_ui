@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'CashMgt',
-      home: ScreenSplash(),
+      home: ScreenSplash(
+        file: '',
+      ),
     );
   }
 }

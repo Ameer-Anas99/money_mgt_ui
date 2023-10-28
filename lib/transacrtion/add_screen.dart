@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:my_app/bottom/bottomnavigationbar.dart';
 import 'package:my_app/function/db_functions.dart';
@@ -5,7 +7,8 @@ import 'package:my_app/model/add_data.dart';
 import 'package:my_app/utility/balance.dart';
 
 class AddTransaction extends StatefulWidget {
-  const AddTransaction({super.key});
+  String file;
+  AddTransaction({super.key, required this.file});
 
   @override
   State<AddTransaction> createState() => _AddTransactionState();
@@ -422,7 +425,7 @@ class _AddTransactionState extends State<AddTransaction> {
     await TransactionDB().insertTransaction(model);
 
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) => BottomBar(username: "", userimage: ""),
+      builder: (context) => BottomBar(username: "", file: widget.file),
     ));
     TransactionDB.instance.getAllTransactions();
 
