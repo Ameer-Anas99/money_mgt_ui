@@ -18,7 +18,6 @@ class EditData extends StatefulWidget {
 
 class _EditTransactionState extends State<EditData> {
   DateTime date = DateTime.now();
-  DateTime? _selectedDateTime;
   String? _selectedtype;
   String? _selectedCategory;
 
@@ -44,7 +43,6 @@ class _EditTransactionState extends State<EditData> {
         TextEditingController(text: widget.obj.amount);
     _explainTextEditingController =
         TextEditingController(text: widget.obj.explain);
-    _selectedDateTime = widget.obj.datetime;
     _selectedtype = widget.obj.type;
     _selectedCategory = widget.obj.category;
   }

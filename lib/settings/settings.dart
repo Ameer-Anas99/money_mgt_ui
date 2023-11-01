@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/settings/about.dart';
 import 'package:my_app/settings/privacy_and_policy.dart';
 import 'package:my_app/settings/reset.dart';
 import 'package:my_app/settings/terms_and_condition.dart';
@@ -17,13 +18,13 @@ class settings extends StatelessWidget {
         ),
       ),
       body: SafeArea(
-        child: ListView(
-          children: [
-            Divider(
-              thickness: 3,
-            ),
-            Card(
-              child: GestureDetector(
+        child: Card(
+          child: ListView(
+            children: [
+              Divider(
+                thickness: 3,
+              ),
+              GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => PrivacyPolicy(),
@@ -36,36 +37,55 @@ class settings extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => TermsCondition(),
-                ));
-              },
-              child: ListTile(
-                title: Text(
-                  'Terms and Conditions',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              Divider(
+                thickness: 3,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => TermsCondition(),
+                  ));
+                },
+                child: ListTile(
+                  title: Text(
+                    'Terms and Conditions',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
-            ),
-            Divider(
-              thickness: 3,
-            ),
-            GestureDetector(
-              onTap: () {
-                reset().resetApp(context);
-              },
-              child: ListTile(
-                title: Text(
-                  'Reset',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              Divider(
+                thickness: 3,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => About(),
+                  ));
+                },
+                child: ListTile(
+                  title: Text(
+                    'About',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
-            ),
-            Divider(thickness: 3)
-          ],
+              Divider(
+                thickness: 3,
+              ),
+              GestureDetector(
+                onTap: () {
+                  reset().resetApp(context);
+                },
+                child: ListTile(
+                  title: Text(
+                    'Reset',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+              Divider(thickness: 3)
+            ],
+          ),
         ),
       ),
     );
