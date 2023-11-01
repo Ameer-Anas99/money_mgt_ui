@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:my_app/function/db_functions.dart';
 import 'package:my_app/model/add_data.dart';
 import 'package:my_app/screens/screen/editdata.dart';
+import 'package:my_app/screens/screen/transaction_list.dart';
 
 class SlidableTransaction extends StatelessWidget {
   SlidableTransaction({super.key, required this.transaction});
@@ -27,12 +28,11 @@ class SlidableTransaction extends StatelessWidget {
             );
           }),
           icon: Icons.edit,
-          foregroundColor: const Color(0xFF2E49FB),
+          foregroundColor: Color.fromARGB(255, 50, 107, 135),
         ),
         SlidableAction(
           onPressed: ((context) async {
             await TransactionDB().deleteTransaction(transaction);
-            Navigator.of(context).pop();
           }),
           icon: Icons.delete,
           foregroundColor: Colors.red,

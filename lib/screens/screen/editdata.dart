@@ -30,7 +30,11 @@ class _EditTransactionState extends State<EditData> {
   final List<String> _iteminex = ['income', 'expense'];
 
   final List<String> _item = [
-    'food',
+    'Food',
+    'Transfer',
+    'Transportation',
+    'Education',
+    'Other'
   ];
 
   @override
