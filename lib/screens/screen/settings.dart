@@ -11,10 +11,13 @@ class settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 122, 27, 139),
-        title: Text(
-          'Settings',
-          style: TextStyle(fontSize: 25),
+        automaticallyImplyLeading: true,
+        backgroundColor: Color.fromARGB(255, 95, 13, 109),
+        title: const Center(
+          child: Text(
+            'Settings',
+            style: TextStyle(fontSize: 25),
+          ),
         ),
       ),
       body: SafeArea(

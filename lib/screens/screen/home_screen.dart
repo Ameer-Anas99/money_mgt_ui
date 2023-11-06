@@ -3,6 +3,7 @@ import 'package:my_app/function/db_functions.dart';
 import 'package:my_app/screens/screen/home_background.dart';
 import 'package:my_app/model/add_data.dart';
 import 'package:my_app/screens/screen/transaction_list.dart';
+import 'package:my_app/screens/widget/uppercase.dart';
 import 'package:my_app/transacrtion/transactions.dart';
 import 'package:my_app/utility/balance.dart';
 
@@ -115,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 height: 40),
                                           ),
                                           title: Text(
-                                            value.explain,
+                                            value.explain.capitalize(),
                                             style: const TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.w600,

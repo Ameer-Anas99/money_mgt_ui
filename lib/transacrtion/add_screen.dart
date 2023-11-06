@@ -17,8 +17,6 @@ class _AddTransactionState extends State<AddTransaction> {
 
   String? selectedIN;
 
-  // CategoryModel? selectedCategoryModel;
-
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController explainController = TextEditingController();
@@ -55,10 +53,10 @@ class _AddTransactionState extends State<AddTransaction> {
         alignment: AlignmentDirectional.center,
         children: [
           backgroundContainer(context),
-          // ignore: avoid_unnecessary_containers
-          Container(
-            //width: screenWidth * 0.9,
-            child: SingleChildScrollView(child: mainContainer()),
+          SingleChildScrollView(
+            child: Container(
+              child: mainContainer(),
+            ),
           )
         ],
       )),
@@ -70,10 +68,6 @@ class _AddTransactionState extends State<AddTransaction> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: Colors.white),
-      // SizedBox(height: screenHeight * .08),
-
-      /* height: 550,
-       width: 340, */
       height: size.height * 0.7,
       width: size.width * 0.9,
       child: Form(

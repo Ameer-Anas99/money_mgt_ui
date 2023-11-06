@@ -32,9 +32,11 @@ class _StatisticsScreenState extends State<StatisticsScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 95, 13, 109),
-        title: const Text(
-          'Statistics',
-          style: TextStyle(fontSize: 24),
+        title: const Center(
+          child: Text(
+            'Statistics',
+            style: TextStyle(fontSize: 24),
+          ),
         ),
       ),
       body: Column(

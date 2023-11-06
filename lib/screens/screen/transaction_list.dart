@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/function/db_functions.dart';
+import 'package:my_app/screens/widget/search.dart';
 import 'package:my_app/transacrtion/transactions.dart';
 
 ValueNotifier showCategory = ValueNotifier('All');
@@ -23,19 +24,22 @@ class _TransactionListState extends State<TransactionList> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          flexibleSpace: Container(
-            color: Color.fromARGB(255, 95, 13, 109),
-          ),
-          title: const Text(
+    return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: Container(
+          color: Color.fromARGB(255, 95, 13, 109),
+        ),
+        title: Center(
+          child: const Text(
             'Transactions History',
             style: TextStyle(fontSize: 23),
           ),
         ),
-        body: const Column(
+      ),
+      body: SafeArea(
+        child: const Column(
           children: [
+            SearchField(),
             Expanded(
               child: Transactions(),
             ),

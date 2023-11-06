@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:my_app/function/db_functions.dart';
 import 'package:my_app/model/add_data.dart';
-import 'package:my_app/screens/screen/editdata.dart';
+import 'package:my_app/screens/widget/editdata.dart';
 import 'package:my_app/screens/screen/transaction_list.dart';
+import 'package:my_app/screens/widget/uppercase.dart';
 
 class SlidableTransaction extends StatelessWidget {
   SlidableTransaction({super.key, required this.transaction});
@@ -51,7 +52,7 @@ class SlidableTransaction extends StatelessWidget {
                 Image.asset('assets/${transaction.category}.jpeg', height: 40),
           ),
           title: Text(
-            transaction.explain,
+            transaction.explain.capitalize(),
             style: const TextStyle(
               fontSize: 17,
               fontWeight: FontWeight.w600,
