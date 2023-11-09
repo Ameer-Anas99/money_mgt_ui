@@ -23,25 +23,13 @@ class PrivacyPolicy extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(15.0),
                 child: Text(
-                    """We are committed to protecting your privacy. This privacy policy sets out how we use and protect any information that you give us when you use our money management mobile app.
-              
-              We may collect the following information:
-              
-              1. Personal information such as name, email address, and phone number
-              2. Transaction data such as account balances, income, and expenses
-              3. Usage data such as app activity and preferences
-              
-              We collect this information to provide money management services and to improve the functionality of our app. We are committed to ensuring that your information is secure. We use industry-standard encryption to protect your financial data and personal information.
-              
-              We may share your information with third-party service providers, such as banks and payment processors, in order to provide money management services. We may also share your information with third-party analytics providers to improve the functionality of our app. We will not sell, rent, or lease your information to third parties.
-              
-              We may use your information to send you promotional emails about our products and services or other information which we think you may find interesting. You may opt out of receiving these emails at any time by clicking the unsubscribe link at the bottom of the email.
-              
-              You may request to access, modify, or delete your information at any time by contacting us. We will respond to your request within a reasonable timeframe.
-              
-              We may update this privacy policy from time to time by posting a new version on our website. You should check this page periodically to ensure that you are happy with any changes.
-              
-              If you have any questions about this privacy policy or how we use your information, please contact us.
+                    """Ameer Anas built the wealth_wizard app as a Free app. This SERVICE is provided by Ameer Anas at no cost and is intended for use as is.
+
+This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
+
+If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy.
+
+The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which are accessible at wealth_wizard unless otherwise defined in this Privacy Policy.
                         
               """,
                     style: TextStyle(fontSize: 15, color: Colors.black87)),

@@ -3,7 +3,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:my_app/function/db_functions.dart';
 import 'package:my_app/model/add_data.dart';
 import 'package:my_app/screens/widget/editdata.dart';
-import 'package:my_app/screens/screen/transaction_list.dart';
 import 'package:my_app/screens/widget/uppercase.dart';
 
 class SlidableTransaction extends StatelessWidget {

@@ -54,78 +54,78 @@ class _AddTransactionState extends State<AddTransaction> {
         children: [
           backgroundContainer(context),
           SingleChildScrollView(
-            child: Container(
-              child: mainContainer(),
-            ),
+            child: mainContainer(),
           )
         ],
       )),
     );
   }
 
-  Container mainContainer() {
+  SingleChildScrollView mainContainer() {
     final Size size = MediaQuery.of(context).size;
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20), color: Colors.white),
-      height: size.height * 0.7,
-      width: size.width * 0.9,
-      child: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 25,
-            ),
-            type(),
-            const SizedBox(
-              height: 20,
-            ),
-            name(),
-            const SizedBox(
-              height: 20,
-            ),
-            explain(),
-            const SizedBox(
-              height: 20,
-            ),
-            transactionAmount(),
-            const SizedBox(
-              height: 20,
-            ),
-            dateTime(),
-            const SizedBox(
-              height: 27,
-            ),
-            GestureDetector(
-              onTap: () {
-                if (_formKey.currentState!.validate()) {
-                  addTransaction();
-                }
-              },
-              child: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: Color.fromARGB(255, 95, 13, 109),
-                ),
-                width: 120,
-                height: 50,
-                child: const Text(
-                  'Save',
-                  style: TextStyle(
-                    fontFamily: 'f',
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    fontSize: 17,
+    return SingleChildScrollView(
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20), color: Colors.white),
+        height: size.height * 0.7,
+        width: size.width * 0.9,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 25,
+              ),
+              type(),
+              const SizedBox(
+                height: 20,
+              ),
+              name(),
+              const SizedBox(
+                height: 20,
+              ),
+              explain(),
+              const SizedBox(
+                height: 20,
+              ),
+              transactionAmount(),
+              const SizedBox(
+                height: 20,
+              ),
+              dateTime(),
+              const SizedBox(
+                height: 27,
+              ),
+              GestureDetector(
+                onTap: () {
+                  if (_formKey.currentState!.validate()) {
+                    addTransaction();
+                  }
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Color.fromARGB(255, 95, 13, 109),
+                  ),
+                  width: 120,
+                  height: 50,
+                  child: const Text(
+                    'Save',
+                    style: TextStyle(
+                      fontFamily: 'f',
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                      fontSize: 17,
+                    ),
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
+              const SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -174,13 +174,11 @@ class _AddTransactionState extends State<AddTransaction> {
               )),
           child: DropdownButtonFormField<String>(
             value: selectedIN,
-
             onChanged: ((value) {
               setState(() {
                 selectedIN = value!;
               });
             }),
-
             items: _iteminex
                 .map((e) => DropdownMenuItem(
                       value: e,
@@ -194,21 +192,12 @@ class _AddTransactionState extends State<AddTransaction> {
                       ),
                     ))
                 .toList(),
-
             hint: const Text(
               'Select',
               style: TextStyle(color: Colors.grey),
             ),
             dropdownColor: Colors.white,
             isExpanded: true,
-            //underline: Container(),
-            // validator: (value) {
-            //   if (value == null || value.isEmpty) {
-            //     return 'Select type';
-            //   } else {
-            //     return null;
-            //   }
-            // },
           )),
     );
   }

@@ -31,7 +31,7 @@ class About extends StatelessWidget {
                         child: const Padding(
                           padding: EdgeInsets.only(top: 30, left: 10),
                           child: Text(
-                            'money mgt',
+                            'Wealth Wizard',
                             style: TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.w500),
                           ),

@@ -29,7 +29,7 @@ class _ScreenSplashState extends State<ScreenSplash> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          'assets/logo mgt.jpeg',
+          'assets/wealth wizerd logo.png',
           height: 310,
         ),
       ),
